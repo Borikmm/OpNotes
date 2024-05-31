@@ -1,6 +1,30 @@
+<template>
+    <div
+      class="block"
+      @pointerdown="startDragging"
+      @mouseenter="onMouseEnter"
+      @mouseleave="onMouseLeave"
+      @mousemove="onMouseMove"
+      :style="blockStyle"
+      ref="block"
+    >
+        <span contenteditable="true" class="input_block" ref="editableText">{{ editableText }}</span>
+        <!-- <p @dblclick="enableEditing" v-if="!isEditing" class="input_block">{{ editableText }}</p>
+        <input v-else v-model="editableText" @blur="saveText" @keyup.enter="saveText" class="input_block"/> -->
+    </div>
+  </template>
+
+
+
 <script setup>
 
-    import { ref, inject, reactive, computed, onMounted, onBeforeUnmount } from 'vue';
+
+    const BLOCK_STYLE_VALUES = {
+        "blockIsDragingColor": "#D33131"
+    }
+
+
+    import { ref, inject, reactive, computed, onMounted, onBeforeUnmount, nextTick } from 'vue';
 
     const Left_panel_width = inject('Left_panel_width').value;
     const Up_panel_height = inject('Up_panel_height').value;
@@ -14,13 +38,15 @@
     const offset = reactive({ x: 0, y: 0 });
     const boxShadow = ref('none');
     const isDragging = ref(false);
+
+
     const isEditing = ref(false);
-    const editableText = ref(props.text);
+    const editableText = ref(`${props.text}`);
 
     const blockStyle = computed(() => ({
         transform: `translate(${position.x}px, ${position.y}px)`,   
         boxShadow: boxShadow.value,
-        transition: isDragging.value ? 'transform 0.1s' : 'box-shadow 0.5s'
+        transition: isDragging.value ? 'transform 0.1s' : 'box-shadow 0.6s ease-in-out',
     }));
 
     let animationFrame;
@@ -28,7 +54,16 @@
 
     // Main events
     const onMouseMove = () => {
-        changeBoxShadow('0 5px 25px #cb31ff');
+
+        if (isDragging.value)
+        {
+            changeBoxShadow(`0 5px 25px ${BLOCK_STYLE_VALUES.blockIsDragingColor}`);
+        }
+        else
+        {
+            changeBoxShadow('0 5px 25px #cb31ff');
+        }
+
     };
 
     const onMouseEnter = () => {
@@ -67,6 +102,8 @@
 
         window.addEventListener('pointermove', onPointerMove);
         window.addEventListener('pointerup', stopDragging);
+
+        changeBoxShadow(`0 5px 25px ${BLOCK_STYLE_VALUES.blockIsDragingColor}`);
     };
 
     const onPointerMove = (event) => {
@@ -98,16 +135,17 @@
     // functions for work with text
     const enableEditing = () => {
         isEditing.value = true;
-        editableText.value = props.text;
         nextTick(() => {
-            const inputElement = block.value.querySelector('input');
-            inputElement && inputElement.focus();
+            const input = document.querySelector('input');
+            if (input) {
+                input.focus();
+                input.select();
+            }
         });
     };  
 
     const saveText = () => {
         isEditing.value = false;
-        props.text = editableText.value;
     };
     //
 
@@ -126,20 +164,7 @@
 </script>
 
 
-<template>
-    <div
-      class="block"
-      @pointerdown="startDragging"
-      @mouseenter="onMouseEnter"
-      @mouseleave="onMouseLeave"
-      @mousemove="onMouseMove"
-      :style="blockStyle"
-      ref="block"
-    >
-        <p @dblclick="enableEditing" v-if="!isEditing">{{ editableText }}</p>
-        <input v-else v-model="editableText" @blur="saveText" @keyup.enter="saveText" />
-    </div>
-  </template>
+
   
 
 
@@ -148,12 +173,16 @@
 .block {
     position: fixed;
     cursor: grab;
-    width: 100px;
-    height: 100px;
-    background: #3085d6;
+    min-width: 100px;
+    min-height: 100px;
+    background: #257ccd;
     padding: 20px;
     margin: auto;
-    border-radius: 5px;
+    border-radius: 10px;
+
+
+    display: inline;
+
 
     transition: 0.1;
     user-select: none;
@@ -164,9 +193,15 @@
     cursor: grabbing;
 }
 
-input {
+.input_block {
+    background: transparent;
     width: 100%;
-    box-sizing: border-box;
+    height: 100%;
+    border: none;
+    color: #6f00c9;
+    font-family: 'Roboto', Arial, sans-serif;
+    font-weight: bold;
+    outline: none;
 }
 
 </style>
