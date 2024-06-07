@@ -6,6 +6,7 @@
 .WorkSpace_container {
   height: 90%;
   display: flex;
+  
 }
 
 </style>

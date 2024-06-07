@@ -30,24 +30,24 @@ inject('Left_panel_width').value = 72;
 
 #ToolPanel {
     width: 100%;
-    background-color: "#232323";
+    background-color: rgb(31, 30, 30);
     height: 100%;
     margin: 0;
     color: black;
     margin-top: 20px;
+    z-index: var(--z-index-toolbar);
 }
 
 
 .Toolbar {
-    border-right: 2px solid;
-    border-color: rgb(41, 41, 41);
+    border-right: 1px solid;
+    border-color: black;
+    background-color: rgb(31, 30, 30);
     -ms-flex-align: center;
     -ms-flex-pack: justify;
     width: 60px;
     height: 100%;
     align-items: center;
-    background: var(--ws-canvas-background);
-    box-shadow: 1px 0 0 0 var(--ws-section-divider-color);
     display: flex;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -55,9 +55,7 @@ inject('Left_panel_width').value = 72;
     justify-content: space-between;
     position: relative;
     text-align: center;
-    transform: translateZ(0);
-    transition: transform .3s cubic-bezier(.645,.045,.355,1);
-    transition-delay: .3s;
+
     width: 72px;
     z-index: var(--z-index-toolbar);
 }

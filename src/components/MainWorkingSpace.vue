@@ -15,8 +15,8 @@
 
 <template>
     <div className="Main_Space">
-        <div v-for="(name_element, index) in GlobalBlocksList" v-bind:key="index" class="See_blocks">
-            <MainInteractBlockTemplate style="color: red;" :text="GlobalBlocksList[index]" />
+        <div v-for="(name_element, index) in GlobalBlocksList" :key="index" :class="name_element">
+            <component :is="getComponent(name_element)" :text="GlobalBlocksList[index]"/>
         </div>
     </div>  
 
@@ -29,6 +29,23 @@
 
     import MainInteractBlockTemplate from './MainBlockTemplate.vue'
 
+    import LineBlockTemplate from './LineTemplate.vue'
+
     const GlobalBlocksList = inject('GlobalBlocksList').value;
+
+
+    const getComponent = (name_element) => {
+        switch (name_element) {
+            case 'Main block':
+                return MainInteractBlockTemplate;
+            case 'Line':
+                return LineBlockTemplate;
+            // Добавьте другие компоненты здесь
+            default:
+                return null; // Или компонент по умолчанию
+        }
+    };
+
+
 
 </script>

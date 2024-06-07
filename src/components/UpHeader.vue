@@ -7,6 +7,7 @@
         display: flex;
         position: relative;
 
+        z-index: 100;
 
         border-bottom: 1px solid black;
 
@@ -57,6 +58,11 @@
 
     .MenuBackGround {
         display: flex;
+    }
+
+
+    .UpPanel {
+        z-index: 10;
     }
 
 
