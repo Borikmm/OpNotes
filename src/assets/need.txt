@@ -13,9 +13,14 @@
     </div>
 </template>
 
+
+
 <script setup>
 
+
     import { ref, inject, reactive, computed, onMounted, onBeforeUnmount} from 'vue';
+
+
 
     // Draggable
     import {getDraggable, startDraggable}  from '../Scripts/Draggable/Draggable.js'; // Подключение класса Draggable
@@ -29,13 +34,19 @@
     });
 
 
+    
     const editableTextBlock = ref(null);
+
     const isEditing = ref(false);
     const editableText = ref(`${props.text}`);
+
+
 
     const onMouseLeave = () => {
         switch_contenteditable("false") // off span text editiong for close blue effect text draging
     };
+
+
 
     // Functions for dragging
     const startDragging = (event) => {

@@ -31,6 +31,8 @@
 
     import LineBlockTemplate from './LineTemplate.vue'
 
+    import TestBlock from './TestBlock.vue'
+
     const GlobalBlocksList = inject('GlobalBlocksList').value;
 
 
@@ -40,6 +42,8 @@
                 return MainInteractBlockTemplate;
             case 'Line':
                 return LineBlockTemplate;
+            case 'Test':
+                return TestBlock;
             // Добавьте другие компоненты здесь
             default:
                 return null; // Или компонент по умолчанию

@@ -16,7 +16,7 @@ inject('Left_panel_width').value = 72;
             <div id="ToolPanel">
                 <EnteractiveComponent image-url="../../public/favicon.ico" name-component="Main block"/>
                 <EnteractiveComponent image-url="../../public/favicon.ico" name-component="Line"/>
-                <EnteractiveComponent image-url="../../public/favicon.ico" name-component="Comment"/>
+                <EnteractiveComponent image-url="../../public/favicon.ico" name-component="Test"/>
             </div>
 
 
