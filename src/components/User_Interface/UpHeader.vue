@@ -90,7 +90,6 @@
 
 import { inject } from 'vue'
 
-
 inject('Up_panel_height').value = 60;
 
 </script>

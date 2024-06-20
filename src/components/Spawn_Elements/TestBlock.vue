@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-  import {getDraggable, startDraggable}  from '../Scripts/Draggable/Draggable.js'; // Подключение класса Draggable
+  import {getDraggable, startDraggable}  from '../../Scripts/Draggable/Draggable.js'; // Подключение класса Draggable
   
 
   // Draggable

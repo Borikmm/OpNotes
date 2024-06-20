@@ -14,14 +14,14 @@
 </template>
 
 <script setup>
-
     import { ref, inject, reactive, computed, onMounted, onBeforeUnmount} from 'vue';
-
+    import { Service } from '@/Scripts/MainServices/Service';
     // Draggable
-    import {getDraggable, startDraggable}  from '../Scripts/Draggable/Draggable.js'; // Подключение класса Draggable
+    import {getDraggable, startDraggable}  from '../../Scripts/Draggable/Draggable.js'; // Подключение класса Draggable
     const thisBlock = ref(null);
     let draggable = getDraggable();
     const blockStyle = draggable.blockStyle;
+    const DataService = new Service().DataService;
 
 
     const props = defineProps({
@@ -39,28 +39,18 @@
 
     // Functions for dragging
     const startDragging = (event) => {
+
         if (isEditing.value) {
             draggable.stopDragging(); // Не начинаем перетаскивание, если режим редактирования включен
         }
     };
 
-
-    // function change_selected_block_z_index()
-    // {
-    //     if (Selected_block != 0)
-    //     {
-    //         console.log(Selected_block);
-    //         Selected_block.style.zIndex = 10;
-    //         Selected_block.style.backgroundColor = "red";
-    //     }
-        
-    //     this_block.value.style.zIndex = 20;
-    //     Selected_block = this_block.value;
-    // }
-
-
     // functions for work with text
     const enableEditing = () => {
+
+        if (DataService.isHaveSelectedBlock()) return; // Select this block if dont have selected block
+        if (DataService.selected_block.value["block_dragging"] != 0) return;
+
         const editableSpan = editableTextBlock.value;
         switch_contenteditable("true")
         if (editableSpan) {

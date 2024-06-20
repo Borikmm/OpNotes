@@ -23,9 +23,9 @@
 
 <script setup>
 
-import LeftPanel from "./components/LeftPanel.vue";
-import UpPanel from "./components/UpHeader.vue";
-import WorkSpace from "./components/MainWorkingSpace.vue";
+import LeftPanel from "./components/User_Interface/LeftPanel.vue";
+import UpPanel from "./components/User_Interface/UpHeader.vue";
+import WorkSpace from "./components/User_Interface/MainWorkingSpace.vue";
 
 
 </script>

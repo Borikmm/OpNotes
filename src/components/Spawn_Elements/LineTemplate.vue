@@ -30,7 +30,7 @@
 
 <script setup>
 
-import {getDraggable, startDraggable}  from '../Scripts/Draggable/Draggable.js'; // Подключение класса Draggable
+import {getDraggable, startDraggable}  from '../../Scripts/Draggable/Draggable.js'; // Подключение класса Draggable
 import { ref, reactive, computed, onMounted, onBeforeUnmount} from 'vue';
 
 // for dragging

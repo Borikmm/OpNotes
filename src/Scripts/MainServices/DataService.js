@@ -1,11 +1,44 @@
 import { ref} from 'vue'
-
+import { Service } from './Service';
 
 export class DataService
 {
     constructor(app)
     {
         this.app = app
+        this.ToogleMenusService = new Service().ToogleMenusService;
+    }
+
+    isHaveSelectedBlock()
+    {
+        return this.selected_block.value["selected_block"] != 0;
+    }
+
+    isHaveOldSelectedBlock()
+    {
+        return this.selected_block.value["old_selected_block"] != 0;
+    }
+
+
+    changeSelectedBlock(value)
+    {
+        if (value == 0 && this.isHaveSelectedBlock())
+        {
+            this.selected_block.value["selected_block"].changeBoxShadow('none');
+            this.selected_block.value["selected_block"] = value;
+            this.ToogleMenusService.SelectMenu("ToolsPanel");
+            return false;
+        }
+
+        this.selected_block.value["selected_block"] = value;
+        this.ToogleMenusService.SelectMenu("PropertiesPanel");
+
+        return true;
+    }
+
+    changeOldSelectedBlock(value)
+    {
+      this.selected_block.value["old_selected_block"] = value;
     }
 
 
@@ -13,22 +46,32 @@ export class DataService
     {
         this.globalVariables = [];
 
-        const blocks_list = ref([])
-        const up_panel_height = ref(0)
-        const left_panel_width = ref(0)
-        const old_selected_block = ref(0)
+        this.blocks_list = ref([])
+        this.up_panel_height = ref(0)
+        this.left_panel_width = ref(0)
+
+        this.selected_block = ref({
+            "selected_block": 0,
+            "block_dragging": 0,
+            'old_selected_block': 0
+        })
         
-        this.app.provide('GlobalBlocksList', blocks_list)
-        this.app.provide('Up_panel_height', up_panel_height)
-        this.app.provide('Left_panel_width', left_panel_width)
-        this.app.provide('Old_selected_block', old_selected_block)
+        this.app.provide('GlobalBlocksList', this.blocks_list)
+        this.app.provide('Up_panel_height', this.up_panel_height)
+        this.app.provide('Left_panel_width', this.left_panel_width)
+        this.app.provide('Selected_block', this.selected_block)
+
+        
 
         this.globalVariables.push(
-            blocks_list, 
-            up_panel_height,
-            left_panel_width,
-            old_selected_block
+            this.blocks_list, 
+            this.up_panel_height,
+            this.left_panel_width,
+            this.selected_block
         );
+
+
+
     }
 
 

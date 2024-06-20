@@ -1,4 +1,5 @@
 import {DataService} from "./DataService";
+import { ToogleMenusService } from "./ToogleMenusService";
 
 export class Service
 {
@@ -20,6 +21,7 @@ export class Service
 
     createServices()
     {
+        this.ToogleMenusService = new ToogleMenusService();
         this.DataService = new DataService(this.app);
     }
 }

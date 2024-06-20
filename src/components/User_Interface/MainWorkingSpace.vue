@@ -9,12 +9,13 @@
         flex-direction: row;
         align-content: center;
         justify-content: flex-start;
+        z-index: 0;
     }
 
 </style>
 
 <template>
-    <div className="Main_Space">
+    <div className="Main_Space" @dblclick="onMainSpaceDblClick">
         <div v-for="(name_element, index) in GlobalBlocksList" :key="index" :class="name_element">
             <component :is="getComponent(name_element)" :text="GlobalBlocksList[index]"/>
         </div>
@@ -27,13 +28,20 @@
 
     import { inject } from 'vue'
 
-    import MainInteractBlockTemplate from './MainBlockTemplate.vue'
+    import MainInteractBlockTemplate from '../Spawn_Elements/MainBlockTemplate.vue'
 
-    import LineBlockTemplate from './LineTemplate.vue'
+    import LineBlockTemplate from '../Spawn_Elements/LineTemplate.vue'
 
-    import TestBlock from './TestBlock.vue'
+    import TestBlock from '../Spawn_Elements/TestBlock.vue'
+    import { Service } from '@/Scripts/MainServices/Service';
 
     const GlobalBlocksList = inject('GlobalBlocksList').value;
+
+    const DataService = new Service().DataService;
+
+    const onMainSpaceDblClick = (event) => {
+        DataService.changeSelectedBlock(0);
+    }
 
 
     const getComponent = (name_element) => {
