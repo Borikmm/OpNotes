@@ -20,20 +20,26 @@ export class DataService
     }
 
 
-    changeSelectedBlock(value)
+    changeSelectedBlock(block)
     {
-        if (value == 0 && this.isHaveSelectedBlock())
+        // If block == 0, unselect block
+        if (block == 0 && this.isHaveSelectedBlock())
         {
-            this.selected_block.value["selected_block"].changeBoxShadow('none');
-            this.selected_block.value["selected_block"] = value;
-            this.ToogleMenusService.SelectMenu("ToolsPanel");
+            this.unselectBlock();
             return false;
         }
 
-        this.selected_block.value["selected_block"] = value;
+        this.selected_block.value["selected_block"] = block;
         this.ToogleMenusService.SelectMenu("PropertiesPanel");
 
         return true;
+    }
+
+    unselectBlock()
+    {
+        this.selected_block.value["selected_block"].changeBoxShadow('none');
+        this.selected_block.value["selected_block"] = 0;
+        this.ToogleMenusService.SelectMenu("ToolsPanel");
     }
 
     changeOldSelectedBlock(value)

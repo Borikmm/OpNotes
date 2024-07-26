@@ -66,6 +66,11 @@
     }
 
 
+    #PathTitle {
+        font-size: 20px;
+    }
+
+
 </style>
 
 <template>
@@ -78,6 +83,7 @@
 
 
         <div className="Title_container">
+            <div id="PathTitle">sss</div>
             <div className="Title">Valer Note v 0.0.2</div>
         </div>
     </div>

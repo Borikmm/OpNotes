@@ -14,6 +14,9 @@ export class ToogleMenusService
 
     SelectMenu(name_menu)
     {
+        if (this.Menu_now == name_menu) return;
+
+
         this.UnselectMenuAction(this.Menu_now);
 
         setTimeout(()=>{

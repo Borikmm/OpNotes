@@ -28,13 +28,15 @@
 
     import { inject } from 'vue'
 
+    // Import Components
     import MainInteractBlockTemplate from '../Spawn_Elements/MainBlockTemplate.vue'
-
     import LineBlockTemplate from '../Spawn_Elements/LineTemplate.vue'
-
     import TestBlock from '../Spawn_Elements/TestBlock.vue'
+
+    // Import Service for working with service
     import { Service } from '@/Scripts/MainServices/Service';
 
+    // List blocks
     const GlobalBlocksList = inject('GlobalBlocksList').value;
 
     const DataService = new Service().DataService;

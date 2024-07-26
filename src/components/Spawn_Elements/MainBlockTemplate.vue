@@ -6,6 +6,7 @@
       @pointerdown="startDragging"
       @mouseleave="onMouseLeave"
       @dblclick="enableEditing"
+      @mousemove="need"
     >
         <span contenteditable="false" class="input_block" ref="editableTextBlock">{{ editableText }}</span>
         <!-- <p @dblclick="enableEditing" v-if="!isEditing" class="input_block">{{ editableText }}</p>
@@ -48,9 +49,9 @@
     // functions for work with text
     const enableEditing = () => {
 
-        if (DataService.isHaveSelectedBlock()) return; // Select this block if dont have selected block
+        if (!DataService.isHaveSelectedBlock()) return; // Select this block if dont have selected block
         if (DataService.selected_block.value["block_dragging"] != 0) return;
-
+        
         const editableSpan = editableTextBlock.value;
         switch_contenteditable("true")
         if (editableSpan) {

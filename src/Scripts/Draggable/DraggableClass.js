@@ -7,10 +7,6 @@ const BLOCK_STYLE_VALUES = {
   blockSelectedColor: "green"
 };
 
-
-
-
-
 export class DraggableFunctionalClass {
 
   constructor (){
@@ -29,9 +25,6 @@ export class DraggableFunctionalClass {
     this.DraggingLogic.stopDragging();
   }
 }
-
-
-
 
 
 class DraggingLogic
@@ -72,12 +65,16 @@ class DraggingLogic
   }
 
   onDblClick(event){
-    this.changeSelectedBlock(this); // Select this block with script
-
     // Off click on mainSpaceDiv
     if (!event) var event = window.event;
     event.cancelBubble = true;
     if (event.stopPropagation) event.stopPropagation();
+
+
+    if (this.checkIsHaveSelectedBlock()) return;
+    this.changeSelectedBlock(this); // Select this block with script
+
+
   };
 
   // boxShadow when Enter Mouse
